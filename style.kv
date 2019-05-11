@@ -3,7 +3,13 @@
 <MainWindow>:
     pos_hint: {'center_x': .5, 'center_y': .5}
     do_default_tab: False
-
+    canvas:
+        Color:
+            rgb: [0.5,0.5,0.5]
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    
     TabbedPanelItem:
         text: 'Main tab'
         Label:
@@ -19,7 +25,5 @@
 
     TabbedPanelItem:
         text: 'Weather tab'
-        RstDocument:
-            text:
-                '\\n'.join(("Hello world", "-----------",
-                "You are in the third tab."))
+        Label:
+            text: 'Lala'
