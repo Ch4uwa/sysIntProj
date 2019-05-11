@@ -1,0 +1,25 @@
+#:kivy 1.10.1
+
+<MainWindow>:
+    pos_hint: {'center_x': .5, 'center_y': .5}
+    do_default_tab: False
+
+    TabbedPanelItem:
+        text: 'Main tab'
+        Label:
+            text: 'First tab Content'
+
+    TabbedPanelItem:
+        text: 'SL tab'
+        BoxLayout:
+            Label:
+                text: 'Second tab content area'
+            Button:
+                text: 'Button that does nothing'
+
+    TabbedPanelItem:
+        text: 'Weather tab'
+        RstDocument:
+            text:
+                '\\n'.join(("Hello world", "-----------",
+                "You are in the third tab."))
