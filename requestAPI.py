@@ -14,18 +14,17 @@ class MyRequests:
         slStationsOnly = "True"
         slMaxResults = "1"
         slUrl = ("https://api.sl.se/api2/typeahead.json?key=" +
-                 APIkeys["siteIdAPIkey"] + "&searchstring=" + searchWord + "&stationsonly=" +
+                 self.APIkeys["siteIdAPIkey"] + "&searchstring=" + searchWord + "&stationsonly=" +
                  slStationsOnly + "&maxresults=" + slMaxResults)
         r = requests.get(slUrl)
         siteIdResp = r.json()["ResponseData"][0]["SiteId"]
 
         # get siteid from slSearchSiteID respons
-
         # set the timewindow to look within
         timeWindowMin = "60"
         # set the args together
         realTimeURL = ("http://api.sl.se/api2/realtimedeparturesV4.json?key=" +
-                       APIkeys["realTimeAPIkey"] + "&siteid=" + siteIdResp + "&timewindow=" + timeWindowMin)
+                       self.APIkeys["realTimeAPIkey"] + "&siteid=" + siteIdResp + "&timewindow=" + timeWindowMin)
         slReq = requests.get(realTimeURL)
         buses = slReq.json()["ResponseData"]["Buses"][0]
         atHome = {

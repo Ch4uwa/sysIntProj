@@ -1,29 +1,47 @@
 #:kivy 1.10.1
 
 <MainWindow>:
-    pos_hint: {'center_x': .5, 'center_y': .5}
-    do_default_tab: False
-    canvas:
-        Color:
-            rgb: [0.5,0.5,0.5]
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    
-    TabbedPanelItem:
-        text: 'Main tab'
-        Label:
-            text: 'First tab Content'
+    sldestination: sldestination
+    sltime: sltime
+    slLineNumber: slLineNumber
+    slStop: slStop
 
-    TabbedPanelItem:
-        text: 'SL tab'
+    BoxLayout:
+        orientation: "vertical"
         BoxLayout:
+            size_hint: 0.5,0.2
             Label:
-                text: 'Second tab content area'
-            Button:
-                text: 'Button that does nothing'
-
-    TabbedPanelItem:
-        text: 'Weather tab'
+                text: "Time: time"
+            Label:
+                text: "Date: date"
+        BoxLayout:
+            orientation: "vertical"
+            Label:
+                size_hint: 1,0.5
+                font_size: 30
+                text: "SL"
+            BoxLayout:
+                size_hint: 1, 0.5
+                spacing: 5
+                Label:
+                    id: slLineNumber
+                    text: "Nothing to show!!"
+                Label:
+                    id: slStop
+                    text: "Nothing to show!!"
+                Label:
+                    id: sldestination
+                    text: "Nothing to show!!"
+                Label:
+                    id: sltime
+                    text: "Nothing to show!!"
         Label:
-            text: 'Lala'
+            font_size: 30
+            text: "Another row"
+        Label:
+            font_size: 30
+            text: "Another row"
+        Label:
+            font_size: 30
+            text: "Another row"
+
