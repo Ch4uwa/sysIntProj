@@ -1,5 +1,6 @@
 from __future__ import print_function
 import datetime
+from datetime import timezone
 import pickle
 import os.path
 import json
@@ -11,7 +12,7 @@ from google.auth.transport.requests import Request
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
-def main():
+def gCalMain():
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -35,20 +36,12 @@ def main():
 
     # Call the Calendar API
     cal = 'pbcs7fs161rhp4oosksi6nevc06fe0og@import.calendar.google.com'
-    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     events_result = service.events().list(calendarId=cal, timeMin=now,
-                                          maxResults=10, singleEvents=True,
+                                          maxResults=5, singleEvents=True,
                                           orderBy='startTime').execute()
-    events = events_result.get('items', [])
-
-    if not events:
-        print('No upcoming events found.')
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        print(start, event['summary'])
-
-
+    events = events_result.get('items')
+    return events
 
 if __name__ == '__main__':
-    main()
+    gCalMain()

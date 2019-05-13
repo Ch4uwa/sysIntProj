@@ -1,47 +1,44 @@
 #:kivy 1.10.1
 
 <MainWindow>:
-    sldestination: sldestination
     sltime: sltime
-    slLineNumber: slLineNumber
-    slStop: slStop
+    w_weather: w_weather
+    gCal: gCal
+    clock: clock
+    names: names
+    yearTrivia: yearTrivia
 
     BoxLayout:
+        cols:1
         orientation: "vertical"
-        BoxLayout:
-            size_hint: 0.5,0.2
-            Label:
-                text: "Time: time"
-            Label:
-                text: "Date: date"
         BoxLayout:
             orientation: "vertical"
             Label:
+                id: clock
+                text: "Time: time"
+            Label:
+                id: names
+                text: "Nothing to show"
+            Label:
+                text_size: self.size
+                id: yearTrivia
+                text: "Nothing to show"
+            Button:
                 size_hint: 1,0.5
-                font_size: 30
-                text: "SL"
-            BoxLayout:
-                size_hint: 1, 0.5
-                spacing: 5
-                Label:
-                    id: slLineNumber
-                    text: "Nothing to show!!"
-                Label:
-                    id: slStop
-                    text: "Nothing to show!!"
-                Label:
-                    id: sldestination
-                    text: "Nothing to show!!"
-                Label:
-                    id: sltime
-                    text: "Nothing to show!!"
-        Label:
-            font_size: 30
-            text: "Another row"
-        Label:
-            font_size: 30
-            text: "Another row"
-        Label:
-            font_size: 30
-            text: "Another row"
+                text: "Press Me!"
+                on_release: root.randNumbs(), root.getNames(), root.getWeather(), root.getSL(), root.getCal(), root.getClock
+        BoxLayout:
+            cols:3
+            Label:
+                text_size: self.size
+                id: sltime
+                text: "Nothing to show!!"
+            Label:
+                text_size: self.size
+                id: w_weather
+                text: "Another row"
+            Label:
+                text_size: self.size
+                id: gCal
+                text: "Blabla"
 

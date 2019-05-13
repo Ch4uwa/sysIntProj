@@ -7,9 +7,15 @@ import spotipy
 class MyRequests:
     APIkeys = {"siteIdAPIkey": "994bc5defb6e45d9a657f8125bfabf0f",
                "realTimeAPIkey": "0c84a833b5744b83ab387e0be62ebeb6", "weatherApiKey": "ba3f2e8a9bb3db4c249970a998e1c38b"}
-    # Show time of departure SL
-    def slRealTime(self):
 
+    def randNames(self):
+        data = requests.get('http://api.namnapi.se/v2/names.json?limit=1')
+        d = data.json()
+        return d
+
+# Show time of departure SL
+
+    def slRealTime(self):
         searchWord = "Gösta Frohms väg(Botkyrka)"
         slStationsOnly = "True"
         slMaxResults = "1"
@@ -26,24 +32,27 @@ class MyRequests:
         realTimeURL = ("http://api.sl.se/api2/realtimedeparturesV4.json?key=" +
                        self.APIkeys["realTimeAPIkey"] + "&siteid=" + siteIdResp + "&timewindow=" + timeWindowMin)
         slReq = requests.get(realTimeURL)
-        buses = slReq.json()["ResponseData"]["Buses"][0]
-        atHome = {
-            "lineNumber": buses["LineNumber"],
-            "destination": buses["Destination"],
-            "stopArea": buses["StopAreaName"],
-            "displayTime": buses["DisplayTime"]}
-
-        return atHome
-
-    def __init__(self, town="Tullinge"):
-        self.town = town
+        try:
+            if not slReq.json()["ResponseData"].get("Buses")[0]:
+                return False
+            else:
+                buses = slReq.json()["ResponseData"].get("Buses")[0]
+                atHome = {
+                    "lineNumber": buses["LineNumber"],
+                    "destination": buses["Destination"],
+                    "stopArea": buses["StopAreaName"],
+                    "displayTime": buses["DisplayTime"]}
+                return atHome
+        except:
+            return False
 
     def weatherAPI(self):
         # Show the temperature and if rain from Openweather
+        town = "Stockholm"
         countryID = "swe"
         units = "metric"
         weatherURL = ("http://api.openweathermap.org/data/2.5/weather?q=" +
-                      self.town + "," + countryID + "&APPID=" + APIkeys["weatherApiKey"] + "&units=" + units)
+                      town + "," + countryID + "&APPID=" + self.APIkeys["weatherApiKey"] + "&units=" + units)
         r = requests.get(weatherURL)
         weather = r.json()
         return weather
@@ -54,10 +63,10 @@ class MyRequests:
         r = requests.get(clockUrl)
         return r.json()
 
+    def numbers(self):
+        randNumURL = "http://numbersapi.com/random/year?json"
+        r = requests.get(randNumURL)
+        return r.json()
 
-# clock = WorldTimeReq()
-# print(clock.worldclockapi().get("currentDateTime"))
-# print(clock.worldclockapi().get("dayOfTheWeek"))
-# print(clock.worldclockapi().get("timeZoneName"))
-
-# ---------------------------------
+if __name__ == "__main__":
+    MyRequests()
