@@ -1,12 +1,11 @@
 import requests
-import spotipy
 
 # required information
 
 
 class MyRequests:
-    APIkeys = {"siteIdAPIkey": "994bc5defb6e45d9a657f8125bfabf0f",
-               "realTimeAPIkey": "0c84a833b5744b83ab387e0be62ebeb6", "weatherApiKey": "ba3f2e8a9bb3db4c249970a998e1c38b"}
+    APIkeys = {"siteIdAPIkey": "",
+               "realTimeAPIkey": "", "weatherApiKey": ""}
 
     def randNames(self):
         data = requests.get('http://api.namnapi.se/v2/names.json?limit=1')

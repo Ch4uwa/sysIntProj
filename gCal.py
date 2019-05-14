@@ -43,5 +43,6 @@ def gCalMain():
     events = events_result.get('items')
     return events
 
+
 if __name__ == '__main__':
     gCalMain()

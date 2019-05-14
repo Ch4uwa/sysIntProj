@@ -9,36 +9,63 @@
     yearTrivia: yearTrivia
 
     BoxLayout:
+        spacing: 20
         cols:1
         orientation: "vertical"
         BoxLayout:
             orientation: "vertical"
+            Button:
+                size_hint: 1,0.5
+                text: "Update Clock!"
+                on_release: root.getClock()
             Label:
                 id: clock
                 text: "Time: time"
+            Button:
+                size_hint: 1,0.5
+                text: "Update Names!"
+                on_release: root.getNames()
             Label:
                 id: names
                 text: "Nothing to show"
+            Button:
+                size_hint: 1,0.5
+                text: "Update Trivial!"
+                on_release: root.randNumbs()
             Label:
                 text_size: self.size
                 id: yearTrivia
                 text: "Nothing to show"
-            Button:
-                size_hint: 1,0.5
-                text: "Press Me!"
-                on_release: root.randNumbs(), root.getNames(), root.getWeather(), root.getSL(), root.getCal(), root.getClock
         BoxLayout:
             cols:3
-            Label:
-                text_size: self.size
-                id: sltime
-                text: "Nothing to show!!"
-            Label:
-                text_size: self.size
-                id: w_weather
-                text: "Another row"
-            Label:
-                text_size: self.size
-                id: gCal
-                text: "Blabla"
+            BoxLayout:
+                orientation:"vertical"
+                Button:
+                    size_hint: 1,0.2
+                    text: "Update SL!"
+                    on_release: root.getSL()
+                Label:
+                    text_size: self.size
+                    id: sltime
+                    text: "Nothing to show!!"
+            BoxLayout:
+                orientation:"vertical"
+                Button:
+                    size_hint: 1,0.2
+                    text: "Update Weather!"
+                    on_release: root.getWeather()
+                Label:
+                    text_size: self.size
+                    id: w_weather
+                    text: "Another row"
+            BoxLayout:
+                orientation:"vertical"
+                Button:
+                    size_hint: 1,0.2
+                    text: "Update Google Calendar!"
+                    on_release: root.getCal()
+                Label:
+                    text_size: self.size
+                    id: gCal
+                    text: "Blabla"
 
