@@ -4,11 +4,14 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.properties import ObjectProperty
 
+
 from requestAPI import MyRequests
 from gCal import gCalMain
 
 
 class MainWindow(Screen):
+    # MainWindow inherits from Screen class
+    # setting variables as Objects to use in .kv file
     sltime = ObjectProperty(None)
     gCal = ObjectProperty(None)
     w_weather = ObjectProperty(None)
@@ -73,6 +76,7 @@ class MainWindow(Screen):
         self.yearTrivia.text = str(r["text"])
 
     def on_enter(self, *args):
+        # load methods when screen is loaded
         self.randNumbs()
         self.getNames()
         self.getWeather()
@@ -84,11 +88,11 @@ class MainWindow(Screen):
 class WindowManager(ScreenManager):
     pass
 
-
+# set .kv file loader
 kv = Builder.load_file("style.kv")
 sm = WindowManager()
 
-
+# give name to windows
 screens = [MainWindow(name="main")]
 for screen in screens:
     sm.add_widget(screen)

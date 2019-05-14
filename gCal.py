@@ -9,6 +9,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 # If modifying these scopes, delete the file token.pickle.
+# Set scope as readonly
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 
@@ -35,13 +36,15 @@ def gCalMain():
     service = build('calendar', 'v3', credentials=creds)
 
     # Call the Calendar API
-    cal = 'pbcs7fs161rhp4oosksi6nevc06fe0og@import.calendar.google.com'
+    # cal = 'pbcs7fs161rhp4oosksi6nevc06fe0og@import.calendar.google.com'
+    cal = "primary"
     now = datetime.datetime.utcnow().isoformat() + "Z"  # 'Z' indicates UTC time
     events_result = service.events().list(calendarId=cal, timeMin=now,
                                           maxResults=5, singleEvents=True,
                                           orderBy='startTime').execute()
     events = events_result.get('items')
     return events
+
 
 if __name__ == '__main__':
     gCalMain()
